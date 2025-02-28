@@ -1,0 +1,88 @@
+/* style.css */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.face-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
+
+.face-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.face-card img {
+    height: 160px;
+    object-fit: cover;
+}
+
+.face-card.is-known {
+    border-color: #28a745;
+}
+
+.face-card.is-unknown {
+    border-color: #dc3545;
+}
+
+.progress {
+    height: 25px;
+}
+
+#upload-progress-bar {
+    transition: width 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    color: #0d6efd;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+/* Video modal */
+.modal-xl {
+    max-width: 90%;
+}
+
+#processed-video {
+    width: 100%;
+    max-height: 80vh;
+}
+
+/* Stats styling */
+#stats-known {
+    font-weight: bold;
+    color: #28a745;
+}
+
+#stats-unknown {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .face-card img {
+        height: 120px;
+    }
+    
+    .modal-xl {
+        max-width: 100%;
+        margin: 0.5rem;
+    }
+}
+

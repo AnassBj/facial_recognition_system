@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Deep Learning Facial Recognition System</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">Upload a video file to identify faces:</p>
+                        
+                        <form id="upload-form" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="video-file" class="form-label">Select Video</label>
+                                <input type="file" class="form-control" id="video-file" name="video" accept=".mp4,.avi,.mov,.mkv,.wmv">
+                                <div class="form-text">Supported formats: MP4, AVI, MOV, MKV, WMV</div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary" id="upload-btn">
+                                    <span class="spinner-border spinner-border-sm d-none" id="upload-spinner" role="status" aria-hidden="true"></span>
+                                    Upload and Analyze
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="alert alert-danger mt-3 d-none" id="error-message"></div>
+                        <div class="progress mt-3 d-none" id="upload-progress">
+                            <div class="progress-bar" id="upload-progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">How it works</h4>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Upload a video containing faces.</li>
+                            <li>The system will automatically detect faces in the video.</li>
+                            <li>
+                                The AI model will identify known people 
+                                {% if known_identities|length > 0 %}
+                                    ({{ known_identities|length }} people in database):
+                                    <ul class="mt-2">
+                                        {% for person in known_identities %}
+                                            <li><span class="text-success">{{ person }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    (Demo mode with sample identities).
+                                {% endif %}
+                            </li>
+                            <li>The system will process the video and label faces:
+                                <ul>
+                                    <li><span class="text-success">Green</span> for recognized people with their names</li>
+                                    <li><span class="text-danger">Red</span> for unknown people</li>
+                                </ul>
+                            </li>
+                            <li>You can download or view the processed video online.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
